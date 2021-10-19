@@ -1,0 +1,27 @@
+site:
+  title: AWS Security Assesment - SellMark
+  start_page: aws-assesment::index.adoc
+content:
+  sources:
+  - url: ./
+    branches: HEAD
+    start_path: docs
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  # supplemental_files: ./supplemental_ui
+
+asciidoc:
+  #extensions:
+   # - asciidoctor-kroki
+  attributes:
+    sectanchors: true
+    stylesheet: docs/css/asciidoctor.css
+    company-name: SellMark
+    company-short-name: SellMark
+    audit-period-aug: 15 Aug to 19 Aug 2021
+    audit-period-sep: 10 Sep to 15 Sep 2021
+    audit-type: AWS Security Assesment
+    aws-account: 947619834730
+    

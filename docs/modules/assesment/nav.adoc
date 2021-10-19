@@ -1,0 +1,12 @@
+* xref:index.adoc[Sellmark - Security Scans and Assessments]
+** xref:aws-assessment-20210810/index.adoc[AWS Security Assessment - Aug 19 2021]
+*** xref:aws-assessment-20210810/introduction.adoc[Introduction]
+*** xref:aws-assessment-20210810/cis-benchmark.adoc[Standard]
+*** xref:aws-assessment-20210810/report.adoc[Report]
+*** xref:aws-assessment-20210810/scan.adoc[Scan]
+
+** xref:aws-assessment-20210908/index.adoc[AWS Security Assessment - Sep 15 2021]
+*** xref:aws-assessment-20210908/introduction.adoc[Introduction]
+*** xref:aws-assessment-20210908/cis-benchmark.adoc[Standard]
+*** xref:aws-assessment-20210908/report.adoc[Report]
+*** xref:aws-assessment-20210908/scan.adoc[Scan]

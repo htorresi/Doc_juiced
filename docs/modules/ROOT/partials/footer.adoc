@@ -1,0 +1,2 @@
+[.text-center]
+Copyright (C) 2020 {company-short-name} - Confidential and Proprietary

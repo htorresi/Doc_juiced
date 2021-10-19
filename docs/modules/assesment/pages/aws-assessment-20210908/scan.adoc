@@ -1,0 +1,11 @@
+= Security Scans
+
+== CIS Level 2 Scan 
+
+=== Summary
+
+image:./aws-assesment-20210910/prowler_score_20210915.png[]
+
+=== Results
+
+link:{attachmentsdir}/prowler-output-20210910.html[CIS Level 2 Scan] - 15 Sep 2021

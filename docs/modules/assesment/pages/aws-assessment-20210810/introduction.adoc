@@ -1,0 +1,64 @@
+= Introduction to {company-name} AWS Security Assessment Report.
+Rod Murillo <rodm@greenmarimba.io>
+v1.0, 2021-02-25
+
+This site represents the AWS Security Assessment Report for {company-name}, performed by Rod Murillo during the audit period {audit-period-aug}.
+
+It includes the Methodology used to perform the tests, and the results of test.
+
+The assessment is based on the CIS AWS Foundation Benchmark v1.2.
+
+== Overview
+
+Security Proposal Details
+
+- Provide a full scan/assessment of the {company-name} production AWS account {aws-account}, and all its resources, testing for common security issues.
+- Test against the CIS 20 AWS foundation benchmark and consensus best practices for managing AWS resources
+- A complete list of vulnerabilities discovered.
+- Provide remediation guidance and recommendations on how to address reported vulnerabilities.
+//- Check for key HIPAA security compliance.
+
+
+== Methodology
+
+Our Assesment Methodology is based on following guides and standards:
+
+- xref:ROOT:cis-benchmark.adoc[CIS AWS Foundation Benchmark v1.2]
+//- https://www.hhs.gov/hipaa/for-professionals/security/index.html[HIPAA Security Rule]
+
+The Center for Internet Security (CIS) developed the CIS AWS Foundations Benchmark, a set of security configuration best practices for AWS. These industry-accepted best practices go beyond the high-level security guidance already available, providing AWS users with clear, step-by-step implementation and assessment procedures.
+
+////
+The HIPAA Security Rule establishes national standards to protect individuals’ electronic personal health information that is created, received, used, or maintained by a covered entity. The Security Rule requires appropriate administrative, physical and technical safeguards to ensure the confidentiality, integrity, and security of electronic protected health information. 
+////
+The Security Rule is located at 45 CFR Part 160 and Subparts A and C of Part 164.  
+
+=== Areas Covered
+
+- Password compliance
+- Root account usage
+- Security Group best practices
+- Compute Containers
+- Databases
+- Management Tools (CloudFormation, CloudTrail, CloudWatch, Config)
+- Messaging
+- Network
+- Security Services (ACM, Cognito, GuardDuty, IAM, KMS, SecretsManager)
+- Storage
+
+=== Areas Not Covered
+
+The assesments does not include the following:
+
+- Provide any remeditation activities or services.  This service can be provided as a separate engagement.
+- Provide internal (OS level) or web vulnerabilities scanning.
+
+== Author/Assessor
+
+Rodrigo Murillo, CISSP, CCSP
+
+- rodm@greenmarimba.com
+- 602-476-8880
+
+
+WARNING: Confidential and Proptiertary. Do not disclose with out permission.

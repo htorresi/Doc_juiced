@@ -1,0 +1,2 @@
+//* xref:index.adoc[Introduction]
+//** xref:cis-benchmark.adoc[CIS AWS Foundation Benchmark v1.2]

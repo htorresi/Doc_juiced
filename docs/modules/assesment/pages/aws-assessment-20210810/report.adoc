@@ -1,0 +1,1420 @@
+= AWS Security Assessment Report for *{company-name}*
+:doctype: book
+//:stylesheet: asciidoc.css
+:table-stripes: even
+
+== Executive summary
+
+This report presents the results of the {audit-type} audit for {company-name} AWS Account {aws-account}, performed during the audit period {audit-period-aug}.
+
+The recommendations provided in this report provide guidanance on the recommendations​ of the identified security risks. This document serves as an assesement of the security controls in place, for the given risk and compliance requirement for the company, and is based on the results of AWS Security Assessment Testing performed over the audit period. Evaluation ratings compare information gathered during the course of the engagement to “best in class” criteria for security standards. These security standards are based on:
+
+- CIS AWS Foundation Benchmark 1.2, Level 2
+- AWS consensus best-practices.  
+
+We highly recommend to review section of Summary of Business Risks and High-Level and Recommendations for better understanding of risks and discovered security issues.
+
+|===
+|Scope |Security Level |Grade 
+
+|AWS CIS Benchmark Foundation 1.2
+|Poor
+|[maroon]#D#
+
+|===
+
+Grading Criteria
+
+[cols="1,2,6"]
+|===
+|Grade |Security |Description 
+
+|[green]#A#
+|Excellent
+|The security exceeds “Industry Best Practice” standards. The overall posture was found to be excellent with only a few low-risk findings identified.
+
+|[maroon]#B#
+|Good
+|The security meets with accepted standards for “Industry Best
+Practice.” The overall posture was found to be strong with only a
+handful of medium- and low- risk shortcomings identified.
+
+|[red]#C#
+|Fair
+|Current solutions protect some areas of the enterprise from security issues. Moderate changes are required to elevate the discussed areas to “Industry Best Practice” standards
+
+|[red]#D#
+|Poor
+|Significant security deficiencies exist. Immediate attention should be given to the discussed issues to address exposures identified. Major changes are required to elevate to “Industry Best Practice” standards.
+
+|[red]#F#
+|Inadequate
+|Serious security deficiencies exist. Shortcomings were identified throughout most or even all of the security controls examined. Improving security will require a major allocation of resources.
+|===
+
+
+== Assumptions & Constraints
+
+As the environment changes, and new vulnerabilities and risks are discovered and made
+public, an organization’s overall security posture will change. Such changes may affect the validity of this report. Therefore, the conclusion reached from our analysis only represents a “snapshot” in time.
+
+
+== Objectives & Scope
+
+// ****
+// sidebar block
+// ****
+
+Overview
+
+This document provides prescriptive guidance for configuring security options for a subset of Amazon Web Services with an emphasis on foundational, testable, and architecture agnostic settings. Specific Amazon Web Services in scope for this document include:
+
+ - AWS Identity and Access Management (IAM)
+ - AWS Config
+ - AWS CloudTrail
+ - AWS CloudWatch
+ - AWS Simple Notification Service (SNS)
+ - AWS Simple Storage Service (S3)
+ - AWS VPC (Default)
+
+Organization:: {company-name}
+Audit Type:: AWS Security Assesment
+Accounts:: {aws-account} 
+Audit period:: {audit-period-aug}
+
+Consultants performed discovery process to gather information about the target and searched for information disclosure vulnerabilities. With this data in hand, we conducted the bulk of the testing manually, which consisted of input validation tests, impersonation (authentication and authorization) tests, and session state management tests. The purpose of this penetration
+testing is to illuminate security risks by leveraging weaknesses  within the environment that leadto the obtainment of unauthorized access and/or the retrieval of sensitive information. The shortcomings identified during the assessment were used to formulate recommendations and mitigation strategies for improving the overall security posture.
+
+== Results Overview     
+
+The test uncovered a vulnerabilities that may cause sensitive data leakage, broken confidentiality and integrity and availability of the resource.
+Identified vulnerabilities are exploitable and the risk posed by these vulnerabilities can cause damage to the application and company.
+
+**CIS Benchmark 1.2 Level 2**
+
+image::Vulnerabilities_by_severity_sellmark.png[]
+
+We performed manual and automated security testing according to the testing methodology.
+
+// //
+// Severity scoring:
+// *Severity* ({caret}) *Critical High Medium Low Informationa* ​ **l
+// - *Critical* ​ - ​Immediate threat to key business processes.
+// - *High* ​ -- Direct threat to key business processes.
+// - *Medium* -- Indirect threat to key business processes or partial threat to business
+// processes.
+// - *Low* ​ -- No direct threat exists. Vulnerability may be exploited using other vulnerabilities.
+// - *Informational* -- This finding does not indicate vulnerability, but states a comment that
+// notifies about design flaws and improper implementation that might cause a problem in
+// the long run.
+
+|===
+|Severity |[maroon]#Critical# |[red]#High# |[blue]#Medium# |[green]#Low# |Informational 
+
+|# Of issues
+|5
+|70
+|145
+|9
+|35 
+
+|===
+
+Severity scoring:
+
+* *Severity*
+- *[maroon]#Critical#* -- Immediate threat to key business processes.
+- *[red]#High#* -- Direct threat to key business processes.
+- *[blue]#Medium#* -- Indirect threat to key business processes or partial threat to business processes.
+- *[green]#Low#* ​ -- No direct threat exists. Vulnerability may be exploited using other vulnerabilities.
+- *Informational* -- This finding does not indicate vulnerability, but states a comment that notifies about design flaws and improper implementation that might cause a problem in the long run.
+
+=== Summary of Business Risks
+
+Medium and low severity issues can lead to:
+
+- Attacks on communication channels and as a result on sensitive data leakage and
+possible modification, in other words it affects the integrity and confidentiality of data transferred.
+- Information leakage about system components which may be used by attackers for
+further malicious actions.
+- Attacks on old and not patched system components with bunch of publicly known
+vulnerabilities.
+- Enumerating existing users emails/usernames and brute forcing their passwords. Easy access to their session after exploitation of high level risks.
+- Combination of few issues can be used for successful realisation of attacks.
+
+Informational severity issues do not carry direct threat but they can be used to gather useful information for an attacker.
+
+
+=== High-Level Recommendations
+
+Taking into consideration all issues that have been discovered, we highly recommend to:
+
+- Conduct current vs. future IT/Security program review
+- Conduct Static code analysis for codebase
+- Establish Secure SDLC best practices, assign Security Engineer to a project to monthly review code, conduct SAST & DAST security testing
+- Review Architecture of application
+- Deploy Web Application Firewall solution to detect any malicious manipulations
+- Continuously monitor logs for anomalies to detect abnormal behaviour and fraud
+transactions. Dedicate security operations engineer to this task
+- Implement Patch Management procedures for whole IT infrastructure and endpoints of employees and developers
+- Continuously Patch production and development environments and systems on regular bases with latest releases and security updates
+- Conduct annual Penetration test and quarterly Vulnerability Scanning against internal and external environment
+- Develop and Conduct Security Awareness training for employees and developers
+- Develop Incident Response Plan in case of Data breach or security incidents
+- Analyse risks for key assets and resources
+- Update codebase to conduct verification and sanitization of user input on both, client and server side
+- Use only encrypted channels for communications
+- Do not send any unnecessary data in requests and cookies
+- Improve server and application configuration to meet security best practises
+
+
+== Performed tests
+
+* The applicable CIS AWS Benchmark tests
+
+=== CIS AWS Foundation Benchmark 1.2 Level 2
+
+|===
+|Criteria Label |Status 
+
+|xref:ROOT:cis-benchmark.adoc[1.1  Avoid the use of the root account]|Meets criteria
+|xref:ROOT:cis-benchmark.adoc[1.2  Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.3  Ensure credentials unused for 90 days or greater are disabled]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.4  Ensure access keys are rotated every 90 days or less]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.5  Ensure IAM password policy requires at least one uppercase letter]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.6  Ensure IAM password policy require at least one lowercase letter]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.7  Ensure IAM password policy require at least one symbol]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.8  Ensure IAM password policy require at least one number]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.9  Ensure IAM password policy requires minimum length of 14 or greater]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.10  Ensure IAM password policy prevents password reuse: 24 or greater]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.11  Ensure IAM password policy expires passwords within 90 days or less]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.12  Ensure no root account access key exists]|Meets criteria
+|xref:ROOT:cis-benchmark.adoc[1.13  Ensure MFA is enabled for the root account]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.15 Ensure security questions are registered in the AWS account  ]|User root can test
+|xref:ROOT:cis-benchmark.adoc[1.16  Ensure IAM policies are attached only to groups or roles]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.17 Maintain current contact details  ]|User root can test
+|xref:ROOT:cis-benchmark.adoc[1.18 Ensure security contact information is registered  ]|User root can test
+|xref:ROOT:cis-benchmark.adoc[1.19 Ensure IAM instance roles are used for AWS resource access from instances]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.20  Ensure a support role has been created to manage incidents with AWS Support]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.22  Ensure IAM policies that allow full "*:*" administrative privileges are not created]|Meets criteria
+|xref:ROOT:cis-benchmark.adoc[2.1  Ensure CloudTrail is enabled in all regions]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[2.3  Ensure the S3 bucket CloudTrail logs to is not publicly accessible]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[2.4  Ensure CloudTrail trails are integrated with CloudWatch Logs]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[2.5  Ensure AWS Config is enabled in all regions]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[2.6  Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.1  Ensure a log metric filter and alarm exist for unauthorized API calls]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.2  Ensure a log metric filter and alarm exist for Management Console sign-in without MFA]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.3  Ensure a log metric filter and alarm exist for usage of root account]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.4  Ensure a log metric filter and alarm exist for IAM policy changes]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.5  Ensure a log metric filter and alarm exist for CloudTrail configuration changes]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.8  Ensure a log metric filter and alarm exist for S3 bucket policy changes]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.12  Ensure a log metric filter and alarm exist for changes to network gateways]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.13  Ensure a log metric filter and alarm exist for route table changes]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.14  Ensure a log metric filter and alarm exist for VPC changes]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[4.1  Ensure no security groups allow ingress from 0.0.0.0/0 or ::/0 to port 22]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[4.2  Ensure no security groups allow ingress from 0.0.0.0/0 or ::/0 to port 3389]|Fails criteria
+
+|Criteria Label |Status 
+
+|xref:ROOT:cis-benchmark.adoc[1.2  Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.3  Ensure credentials unused for 90 days or greater are disabled]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.5  Ensure IAM password policy requires at least one uppercase letter]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.6  Ensure IAM password policy require at least one lowercase letter]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.7  Ensure IAM password policy require at least one symbol]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.8  Ensure IAM password policy require at least one number]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.9  Ensure IAM password policy requires minimum length of 14 or greater]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[1.12  Ensure no root account access key exists]|Meets criteria
+|xref:ROOT:cis-benchmark.adoc[1.13  Ensure MFA is enabled for the root account]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[2.1  Ensure CloudTrail is enabled in all regions]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[2.3  Ensure the S3 bucket CloudTrail logs to is not publicly accessible]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[2.4  Ensure CloudTrail trails are integrated with CloudWatch Logs]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[2.6  Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[2.8  Ensure rotation for customer created CMKs is enabled ]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[2.9   Ensure VPC Flow Logging is Enabled in all VPCs]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.1  Ensure a log metric filter and alarm exist for unauthorized API calls]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.2  Ensure a log metric filter and alarm exist for Management Console sign-in without MFA]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.3  Ensure a log metric filter and alarm exist for usage of root account]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.4  Ensure a log metric filter and alarm exist for IAM policy changes]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.5  Ensure a log metric filter and alarm exist for CloudTrail configuration changes]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.6  Ensure a log metric filter and alarm exist for AWS Management Console authentication failures]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.7  Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.8  Ensure a log metric filter and alarm exist for S3 bucket policy changes]|Fails criteria
+|xref:ROOT:cis-benchmark.adoc[3.9  Ensure a log metric filter and alarm exist for AWS Config configuration changes]|Fails criteria
+|7.2 Ensure there are no EBS Snapshots set as Public (Not part of CIS benchmark)|Meets criteria
+|7.3 Ensure there are no S3 buckets open to the Everyone or Any AWS user (Not part of CIS benchmark)|Fails criteria
+|7.5 Ensure there are no Security Groups not being used (Not part of CIS benchmark)|Meets criteria
+|7.17 Check if Elastic Load Balancers have logging enabled (Not part of CIS benchmark)|Fails criteria
+|7.18 Check if S3 buckets have server access logging enabled (Not part of CIS benchmark)|Fails criteria
+|7.25 Check if S3 buckets have Object-level logging enabled in CloudTrail (Not part of CIS benchmark)|Fails criteria
+|7.29 Ensure there are no EBS Volumes unencrypted (Not part of CIS benchmark)|Meets criteria
+|7.34 Check if S3 buckets have default encryption (SSE) enabled or use a bucket policy to enforce it (Not part of CIS benchmark)|Fails criteria
+|7.35 Check if RDS instances storage is encrypted (Not part of CIS benchmark)|Meets criteria
+|7.40 Check if EBS snapshots are encrypted (Not part of CIS benchmark)|Meets criteria
+|7.92 Check if Elastic Load Balancers have insecure SSL ciphers (Not part of CIS benchmark)|Meets criteria
+
+
+
+
+
+
+
+
+|===
+
+
+==== Security Tools Used
+
+- Prowler
+
+==== Project Limitations
+
+The assessment was conducted against the production AWS environment with the security auditor permissions provided by the company.
+
+== Findings Details
+
+
+=== MFA Self-Service Not Enabled
+
+SEVERITY:​ ​[blue]#Medium#
+
+ISSUE DESCRIPTION:
+
+Security best practices specify that users should regularly change their passwords and rotate their access keys. They should also delete or deactivate credentials that are not needed. We also highly recommend that they use MFA for sensitive operations.
+////
+PROOF OF VULNERABILITY:
+
+image:EV-mfa-self-serve-not-enabled.png[]
+////
+RECOMMENDATIONS​:
+
+You can enable your users to manage their own multi-factor authentication (MFA) devices and credentials on the My Security Credentials page. You can use the AWS Management Console to configure credentials (access keys, passwords, signing certificates, and SSH public keys) and MFA devices for your users. This is useful for a small number of users. But that task could quickly become time consuming as the number of users grows. Security best practices specify that users should regularly change their passwords and rotate their access keys. They should also delete or deactivate credentials that are not needed. We also highly recommend that they use MFA for sensitive operations. This tutorial shows you how to enable these best practices without burdening your administrators.
+
+https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_my-sec-creds-self-manage-mfa-only.html
+
+
+=== Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password
+
+CIS SEVERITY:​ ​ ​ [red]#Medium#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_mfa.png[]
+
+USERS AFFECTED:
+
+|===
+| ** # ** | ** User **
+| 1 | root
+| 2 | gbillingsley@bayou.net
+| 3 | hvu@sellmark.net
+| 4 | rodm@greenmarimba.io
+| 5 | cms_api
+| 6 | said-s3-user
+| 7 | sellmark_api_user
+| 8 | ses-smtp_user.#####
+| 9 | ses-smtp_user.#####
+|===
+
+
+ISSUE DESCRIPTION:
+
+Multi-Factor Authentication (MFA) adds an extra layer of protection on top of a user name and password. With MFA enabled, when a user signs in to an AWS website, they will be prompted for their user name and password as well as for an authentication code from their AWS MFA device. It is recommended that MFA be enabled for all accounts that have a
+console password.
+
+PROOF OF VULNERABILITY:
+
+image:aws_users.png[]
+
+
+RECOMMENDATIONS​:
+
+Perform the following to enable MFA:
+
+1. Sign in to the AWS Management Console and open the link:https://console.aws.amazon.com/iam/[IAM console, window=_blank].
+2. In the navigation pane, choose Users.
+3. In the User Name list, choose the name of the intended MFA user.
+4. Choose the Security Credentials tab, and then choose Manage MFA Device.
+5. In the Manage MFA Device wizard, choose A virtual MFA device, and then choose
+Next Step.
+IAM generates and displays configuration information for the virtual MFA device, including a QR code graphic. The graphic is a representation of the 'secret configuration key' that is available for manual entry on devices that do not support QR codes.
+6. Open your virtual MFA application. (For a list of apps that you can use for hosting virtual
+MFA devices, see Virtual MFA Applications.) If the virtual MFA application supports
+multiple accounts (multiple virtual MFA devices), choose the option to create a new
+account (a new virtual MFA device).
+7. Determine whether the MFA app supports QR codes, and then do one of the following:
+    - Use the app to scan the QR code. For example, you might choose the camera icon or
+choose an option similar to Scan code, and then use the device's camera to scan the code.
+    - In the Manage MFA Device wizard, choose Show secret key for manual configuration, and then type the secret configuration key into your MFA application. When you are finished, the virtual MFA device starts generating one-time passwords.
+8. In the Manage MFA Device wizard, in the Authentication Code 1 box, type the one-time password that currently appears in the virtual MFA device. Wait up to 30 seconds for the device to generate a new one-time password. Then type the second one-time password into the Authentication Code 2 box. Choose Active Virtual MFA.
+
+
+=== Ensure credentials unused for 90 days or greater are disabled
+
+CIS SEVERITY:​ ​ ​ [blue]#Medium#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_90_days.png[]
+
+USERS AFFECTED:
+
+**Logged*
+
+|===
+| ** # ** | ** User **
+| 1 | root
+| 2 | gbillingsley@bayou.net
+| 3 | hvu@sellmark.net
+| 4 | cms_api
+| 5 | said-s3-user
+| 6 | sellmark_api_user
+| 7 | ses-smtp_user.#####
+| 8 | ses-smtp_user.#####
+|===
+
+**Access Key**
+
+|===
+| ** # ** | ** User **
+| 1 | root
+| 2 | gbillingsley@bayou.net
+| 3 | hvu@sellmark.net
+| 4 | cms_api
+| 5 | said-s3-user
+| 6 | sellmark_api_user
+| 7 | ses-smtp_user.#####
+| 8 | ses-smtp_user.#####
+|===
+
+
+ISSUE DESCRIPTION:
+
+AWS IAM users can access AWS resources using different types of credentials, such as passwords or access keys. It is recommended that all credentials that have been unused in 90 or greater days be removed or deactivated.
+
+PROOF OF VULNERABILITY:
+
+image:aws_90_days_expired.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to remove or deactivate credentials:
+
+1. Login to the AWS Management Console
+2. Click Services
+3. Click IAM
+4. Click on Users
+5. Click on Security Credentials
+6. As an Administrator
+    - Click on Make Inactive for credentials that have not been used in 90 Days
+7. As an IAM User
+    - Click on Make Inactive or Delete for credentials which have not been used in 90 Days
+
+
+=== Ensure access keys are rotated every 90 days or less
+
+CIS SEVERITY:​ ​ ​ [blue]#Medium#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_90_days_expirated.png[]
+
+USERS AFFECTED:
+
+|===
+| ** # ** | ** User **
+| 1 | root
+| 2 | gbillingsley@bayou.net
+| 3 | hvu@sellmark.net
+| 4 | cms_api
+| 5 | said-s3-user
+| 6 | sellmark_api_user
+| 7 | ses-smtp_user.#####
+| 8 | ses-smtp_user.#####
+|===
+
+
+ISSUE DESCRIPTION:
+
+Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS. AWS users need their own access keys to make programmatic calls to AWS from the AWS Command Line Interface (AWS CLI), Tools for Windows PowerShell, the AWS SDKs, or direct HTTP calls using the APIs for individual AWS services It is recommended that all access keys be regularly rotated.
+
+Rotating access keys will reduce the window of opportunity for an access key that is associated with a compromised or terminated account to be used.
+
+Access keys should be rotated to ensure that data cannot be accessed with an old key which might have been lost, cracked, or stolen.
+
+
+PROOF OF VULNERABILITY:
+
+image:aws_pass_expirated.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to rotate access keys:
+
+1. Login to the AWS Management Console:
+2. Click Services
+3. Click IAM
+4. Click on Users
+5. Click on Security Credentials
+6. As an Administrator
+    - Click on Make Inactive for keys that have not been rotated in 90 Days
+7. As an IAM User
+    - Click on Make Inactive or Delete for keys which have not been rotated or used in 90 Days
+8. Click on Create Access Key
+9. Update programmatic call with new Access Key credentials
+
+
+=== Ensure IAM password policy requires at least one uppercase letter
+
+CIS SEVERITY:​ ​ ​ [blue]#Medium#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_up_letter.png[]
+
+ISSUE DESCRIPTION:
+
+Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure password are comprised of different character sets. It is recommended that the password policy require at least one uppercase letter.
+
+PROOF OF VULNERABILITY:
+
+image:aws_up_policy.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to set the password policy as prescribed:
+
+1. Login to AWS Console (with appropriate permissions to View Identity Access Management Account Settings)
+2. Go to IAM Service on the AWS Console
+3. Click on Account Settings on the Left Pane
+4. Check "Requires at least one uppercase letter"
+5. Click "Apply password policy"
+
+
+=== Ensure IAM password policy require at least one lowercase letter
+
+CIS SEVERITY:​ ​ ​ [blue]#Medium#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_lower_letter.png[]
+
+ISSUE DESCRIPTION:
+
+Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure password are comprised of different character sets. It is recommended that the password policy require at least one lowercase letter.
+
+PROOF OF VULNERABILITY:
+
+image:aws_up_policy.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to set the password policy as prescribed:
+
+1. Login to AWS Console (with appropriate permissions to View Identity Access Management Account Settings)
+2. Go to IAM Service on the AWS Console
+3. Click on Account Settings on the Left Pane
+4. Check "Requires at least one lowercase letter"
+5. Click "Apply password policy"
+
+
+=== Ensure IAM password policy require at least one symbol
+
+CIS SEVERITY:​ ​ ​ [blue]#Medium#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_symbol.png[]
+
+ISSUE DESCRIPTION:
+
+Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure password are comprised of different character sets. It is recommended that the password policy require at least one symbol.
+
+PROOF OF VULNERABILITY:
+
+image:aws_symbol.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to set the password policy as prescribed:
+
+1. Login to AWS Console (with appropriate permissions to View Identity Access Management Account Settings)
+2. Go to IAM Service on the AWS Console
+3. Click on Account Settings on the Left Pane
+4. Check "Require at least one non-alphanumeric character"
+5. Click "Apply password policy"
+
+
+=== Ensure IAM password policy require at least one number
+
+CIS SEVERITY:​ ​ ​ [blue]#Medium#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_number.png[]
+
+ISSUE DESCRIPTION:
+
+Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure password are comprised of different character sets. It is recommended that the password policy require at least one number.
+
+PROOF OF VULNERABILITY:
+
+image:aws_number.png[]
+
+
+RECOMMENDATIONS​:
+
+Perform the following to set the password policy as prescribed:
+
+1. Login to AWS Console (with appropriate permissions to View Identity Access Management Account Settings)
+2. Go to IAM Service on the AWS Console
+3. Click on Account Settings on the Left Pane
+4. Check "Require at least one number"
+5. Click "Apply password policy"
+
+
+=== Ensure IAM password policy requires minimum length of 14 or greater
+
+CIS SEVERITY:​ ​ ​ [blue]#Medium#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_length.png[]
+
+ISSUE DESCRIPTION:
+
+Password policies are, in part, used to enforce password complexity requirements. IAM password policies can be used to ensure password are at least a given length. It is recommended that the password policy require a minimum password length 14.
+
+PROOF OF VULNERABILITY:
+
+image:aws_length.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to set the password policy as prescribed:
+
+1. Login to AWS Console (with appropriate permissions to View Identity Access
+Management Account Settings)
+2. Go to IAM Service on the AWS Console
+3. Click on Account Settings on the Left Pane
+4. Set "Minimum password length" to 14 or greater.
+5. Click "Apply password policy"
+
+
+=== Ensure IAM password policy prevents password reuse: 24 or greater
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_prevent.png[]
+
+ISSUE DESCRIPTION:
+
+IAM password policies can prevent the reuse of a given password by the same user. It is recommended that the password policy prevent the reuse of passwords.
+
+PROOF OF VULNERABILITY:
+
+image:aws_reused.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to set the password policy as prescribed:
+
+1. Login to AWS Console (with appropriate permissions to View Identity Access Management Account Settings)
+2. Go to IAM Service on the AWS Console
+3. Click on Account Settings on the Left Pane
+4. Check "Prevent password reuse"
+5. Set "Number of passwords to remember" is set to 24
+
+
+=== Ensure IAM password policy expires passwords within 90 days or less
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_expired.png[]
+
+ISSUE DESCRIPTION:
+
+AM password policies can require passwords to be rotated or expired after a given number of days. It is recommended that the password policy expire passwords after 90 days or less.
+
+PROOF OF VULNERABILITY:
+
+image:aws_expired.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to set the password policy as prescribed:
+
+1. Login to AWS Console (with appropriate permissions to View Identity Access
+Management Account Settings)
+2. Go to IAM Service on the AWS Console
+3. Click on Account Settings on the Left Pane
+4. Check "Enable password expiration"
+5. Set "Password expiration period (in days):" to 90 or less
+
+
+=== Ensure MFA is enabled for the root account
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_mfa_root.png[]
+
+ISSUE DESCRIPTION:
+
+The root account is the most privileged user in an AWS account. MFA adds an extra layer of protection on top of a user name and password. With MFA enabled, when a user signs in to an AWS website, they will be prompted for their user name and password as well as for an authentication code from their AWS MFA device.
+
+Enabling MFA provides increased security for console access as it requires the authenticating principal to possess a device that emits a time-sensitive key and have knowledge of a credential.
+
+Note: When virtual MFA is used for root accounts, it is recommended that the device used is NOT a personal device, but rather a dedicated mobile device (tablet or phone) that is managed to be kept charged and secured independent of any individual personal devices.
+
+PROOF OF VULNERABILITY:
+
+image:aws_mfa_inactive.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to establish MFA for the root account:
+
+1. Sign in to the AWS Management Console and open the link:https://console.aws.amazon.com/iam/[IAM console, window=_blank]
+    - Note: to manage MFA devices for the root AWS account, you must use your root account credentials to sign in to AWS. You cannot manage MFA devices for the root account using other credentials.
+2. Choose Dashboard , and under Security Status , expand Activate MFA on your root
+account.
+3. Choose Activate MFA
+4. In the wizard, choose A virtual MFA device and then choose Next Step .
+5. IAM generates and displays configuration information for the virtual MFA device, including a QR code graphic. The graphic is a representation of the 'secret configuration key' that is available for manual entry on devices that do not support QR codes.
+6. Open your virtual MFA application. (For a list of apps that you can use for hosting virtual MFA devices, see Virtual MFA Applications.) If the virtual MFA application supports multiple accounts (multiple virtual MFA devices), choose the option to create a new account (a new virtual MFA device).
+7. Determine whether the MFA app supports QR codes, and then do one of the following:
+
+    - Use the app to scan the QR code. For example, you might choose the camera icon or choose an option similar to Scan code, and then use the device's camera to scan the code.
+
+    - In the Manage MFA Device wizard, choose Show secret key for manual configuration, and then type the secret configuration key into your MFA application.
+    
+When you are finished, the virtual MFA device starts generating one-time passwords.
+
+1. In the Manage MFA Device wizard, in the Authentication Code 1 box, type the one-time password that currently appears in the virtual MFA device. Wait up to 30 seconds for the device to generate a new one-time password. Then type the second one-time password into the Authentication Code 2 box. Choose Active Virtual MFA.
+
+
+
+=== Ensure IAM policies are attached only to groups or roles
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_groups.png[]
+
+USERS AFFECTED:
+
+|===
+| ** # ** | ** User **
+| 1 | root
+| 2 | gbillingsley@bayou.net
+| 3 | hvu@sellmark.net
+| 4 | rodm@greenmarimba.io
+| 5 | cms_api
+| 6 | said-s3-user
+| 7 | sellmark_api_user
+| 8 | ses-smtp_user.#####
+| 9 | ses-smtp_user.#####
+|===
+
+ISSUE DESCRIPTION:
+
+By default, IAM users, groups, and roles have no access to AWS resources. IAM policies are the means by which privileges are granted to users, groups, or roles. It is recommended that IAM policies be applied directly to groups and roles but not users.
+
+PROOF OF VULNERABILITY:
+
+image:aws_groups_policy.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to create an IAM group and assign a policy to it:
+
+1. Sign in to the AWS Management Console and open the link:https://console.aws.amazon.com/iam/[IAM console, window=_blank].
+2. In the navigation pane, click Groups and then click Create New Group.
+3. In the Group Name box, type the name of the group and then click Next Step.
+4. In the list of policies, select the check box for each policy that you want to apply to all members of the group. Then click Next Step.
+5. Click Create Group
+
+Perform the following to add a user to a given group:
+
+1. Sign in to the AWS Management Console and open the link:https://console.aws.amazon.com/iam/[IAM console, window=_blank]
+2. In the navigation pane, click Groups
+3. Select the group to add a user to
+4. Click Add Users To Group
+5. Select the users to be added to the group
+6. Click Add Users
+
+Perform the following to remove a direct association between a user and policy:
+
+1. Sign in to the AWS Management Console and open the link:https://console.aws.amazon.com/iam/[IAM console, window=_blank]
+2. In the left navigation pane, click on Users
+3. For each user:
+```
+    1 - Select the user
+    2 - Click on the Permissions tab
+    3 - Expand Managed Policies
+    4 - Click Detach Policy for each policy
+    5 - Expand Inline Policies
+    6 - Click Remove Policy for each policy
+```
+
+
+=== Ensure a support role has been created to manage incidents with AWS Support
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_support.png[]
+
+DESCRIPTION:
+
+AWS provides a support center that can be used for incident notification and response, as
+well as technical support and customer services. Create an IAM Role to allow authorized
+users to manage incidents with AWS Support.
+
+PROOF OF VULNERABILITY:
+
+image:aws_support.png[]
+
+RECOMMENDATIONS​:
+
+By implementing least privilege for access control, an IAM Role will require an appropriateIAM Policy to allow Support Center Access in order to manage Incidents with AWS Support. please consider how to configure link:https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html[policies, window=_blank] & link:https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html[roles, window=_blank].
+
+
+
+=== Ensure CloudTrail is enabled in all regions
+
+CIS SEVERITY:​ ​ ​ [maroon]#Critical#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_CloudTrail.png[]
+
+
+ISSUE DESCRIPTION:
+
+AWS CloudTrail is a web service that records AWS API calls for your account and delivers log files to you. CloudTrail provides a history of AWS API calls for an account, including API calls made via the Management Console, SDKs, command line tools, and higher-level AWS services (such as CloudFormation).
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to enable global (Multi-region) CloudTrail logging:
+
+1. Sign in to the AWS Management Console and open the link:https://console.aws.amazon.com/cloudtrail[IAM console]
+2. Click on Trails on the left navigation pane
+3. Click Get Started Now , if presented
+    - Click Add new trail
+    - Enter a trail name in the Trail name box
+    - Set the Apply trail to all regions option to Yes
+    - Specify an S3 bucket name in the S3 bucket box
+    - Click Create
+4. If 1 or more trails already exist, select the target trail to enable for global logging
+5. Click the edit icon (pencil) next to Apply trail to all regions , Click Yes and Click Save.
+6. Click the edit icon (pencil) next to Management Events click All for setting Read/Write Events and Click Save.
+
+
+=== Ensure the S3 bucket CloudTrail logs to is not publicly accessible
+
+CIS SEVERITY:​ ​ ​ [maroon]#Critical#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler-s3-bucket.png[]
+
+ISSUE DESCRIPTION:
+
+CloudTrail logs a record of every API call made in your AWS account. These logs file are stored in an S3 bucket. It is recommended that the bucket policy, or access control list (ACL), applied to the S3 bucket that CloudTrail logs to prevents public access to the CloudTrail logs.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-s3-bucket.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to remove any public access that has been granted to the bucket via an ACL or S3 bucket policy:
+
+1. Go to link:https://console.aws.amazon.com/s3/home[Amazon S3, window=_blank] console
+2. Right-click on the bucket and click Properties
+3. In the Properties pane, click the Permissions tab.
+4. The tab shows a list of grants, one row per grant, in the bucket ACL. Each row identifies the grantee and the permissions granted.
+5. Select the row that grants permission to Everyone or Any Authenticated User
+6. Uncheck all the permissions granted to Everyone or Any Authenticated User (click x to delete the row).
+7. Click Save to save the ACL.
+8. If the Edit bucket policy button is present, click it.
+9. Remove any Statement having an Effect set to Allow and a Principal set to "*" or {"AWS" : "*"}.
+
+By default, S3 buckets are not publicly accessible.
+
+
+=== Ensure CloudTrail trails are integrated with CloudWatch Logs
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_cloudwatch.png[]
+
+ISSUE DESCRIPTION:
+
+AWS CloudTrail is a web service that records AWS API calls made in a given AWS account. Sending CloudTrail logs to CloudWatch Logs will facilitate real-time and historic activity logging based on user, API, resource, and IP address, and provides opportunity to establish alarms and notifications for anomalous or sensitivity account activity.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to establish the prescribed state:
+
+1. Sign in to the AWS Management Console and open the link:https://console.aws.amazon.com/cloudtrail/[CloudTrail, window=_blank] console.
+2. Under All Buckets, click on the target bucket you wish to evaluate
+3. Click Properties on the top right of the console
+4. Click Trails in the left menu
+5. Click on each trail where no CloudWatch Logs are defined
+6. Go to the CloudWatch Logs section and click on Configure
+7. Define a new or select an existing log group
+8. Click on Continue
+9. Configure IAM Role which will deliver CloudTrail events to CloudWatch Logs
+    - Create/Select an IAM Role and Policy Name
+    - Click Allow to continue
+
+
+=== Ensure AWS Config is enabled in all regions
+
+CIS SEVERITY:​ ​ ​ [blue]#Medium#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_config_all.png[]
+
+ISSUE DESCRIPTION:
+
+AWS Config is a web service that performs configuration management of supported AWS resources within your account and delivers log files to you. The recorded information includes the configuration item (AWS resource), relationships between configuration items (AWS resources), any configuration changes between resources. It is recommended to enable AWS Config be enabled in all regions.
+
+PROOF OF VULNERABILITY:
+
+image:config-enabled.png[]
+
+RECOMMENDATIONS​:
+
+To implement AWS Config configuration Via AWS Management Console:
+
+1. Select the region you want to focus on in the top right of the console
+2. Click Services
+3. Click Config
+4. Define which resources you want to record in the selected region
+5. Choose to include global resources (IAM resources)
+6. Specify an S3 bucket in the same account or in another managed AWS account
+7. Create an SNS Topic from the same AWS account or another managed AWS account
+
+
+=== Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_s3_logging.png[]
+
+ISSUE DESCRIPTION:
+
+S3 Bucket Access Logging generates a log that contains access records for each request made to your S3 bucket. An access log record contains details about the request, such as the request type, the resources specified in the request worked, and the time and date the request was processed. It is recommended that bucket access logging be enabled on the CloudTrail S3 bucket.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-group.png[]
+
+image:cloudTrail-s3-bucket.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to enable S3 bucket logging:
+
+1. Sign in to the AWS Management Console and open the link:https://console.aws.amazon.com/s3[S3, window=_blank] console.
+2. Under All Buckets click on the target S3 bucket
+3. Click on Properties in the top right of the console
+4. Under Bucket: <s3_bucket_for_cloudtrail> click on Logging
+5. Configure bucket logging
+    - Click on Enabled checkbox
+    - Select Target Bucket from list
+    - Enter a Target Prefix
+6. Click Save
+
+
+=== Ensure rotation for customer created CMKs is enabled (Scored)
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_cmk.png[]
+////
+KEY EFFECTED:
+
+|===
+| **Region** | ** Key **
+| us-east-1 | Key 7e3d1058-26c5-4ff7-9807-b1c6d85ed849
+|=== 
+////
+
+ISSUE DESCRIPTION:
+
+AWS Key Management Service (KMS) allows customers to rotate the backing key which is key material stored within the KMS which is tied to the key ID of the Customer Created customer master key (CMK). It is the backing key that is used to perform cryptographic operations such as encryption and decryption. Automated key rotation currently retains all prior backing keys so that decryption of encrypted data can take place transparently. It is recommended that CMK key rotation be enabled.
+////
+PROOF OF VULNERABILITY:
+
+image:CMK-rotation.png[]
+////
+RECOMMENDATIONS​:
+
+1. Sign in to the AWS Management Console and open the link:https://console.aws.amazon.com/iam[IAM, window=_blank] console.
+2. In the left navigation pane, choose Encryption Keys.
+3. Select a customer created master key (CMK)
+4. Under the Key Policy section, move down to Key Rotation.
+5. Check the Rotate this key every year checkbox.
+
+
+=== Ensure VPC Flow Logging is Enabled in all VPCs (Scored)
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_vpc_flow.png[]
+
+|===
+| ** # ** | ** Region **
+| 1 | eu-north-1
+| 2 | ap-northeast-2
+| 3 | eu-west-3
+| 4 | ca-central-1
+| 5 | us-east-2
+| 6 | eu-west-1
+| 8 | ap-southeast-2
+| 9 | us-west-2
+| 10 | ap-southeast-1
+| 11 | sa-east-1
+| 12 | ap-south-1
+| 13 | us-west-1
+| 14 | ap-northeast-1
+| 15 | us-east-1
+| 16 | eu-west-2
+| 17 | eu-central-1
+|===
+
+ISSUE DESCRIPTION:
+
+VPC Flow Logs is a feature that enables you to capture information about the IP traffic
+going to and from network interfaces in your VPC. After you've created a flow log, you can
+view and retrieve its data in Amazon CloudWatch Logs. It is recommended that VPC Flow
+Logs be enabled for packet "Rejects" for VPCs.
+
+VPC Flow Logs provide visibility into network traffic that traverses the VPC and can be
+used to detect anomalous traffic or insight during security workflows.
+
+PROOF OF VULNERABILITY:
+
+image:VPCFlowLog.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to determine if VPC Flow logs is enabled:
+
+1. Sign into the management console
+2. Select Services then VPC
+3. In the left navigation pane, select Your VPCs
+4. Select a VPC
+5. In the right pane, select the Flow Logs tab.
+6. If no Flow Log exists, click Create Flow Log
+7. For Filter, select Reject
+8. Enter in a Role and Destination Log Group
+9. Click Create Log Flow
+10. Click on CloudWatch Logs Group
+
+Note: Setting the filter to "Reject" will dramatically reduce the logging data accumulation for this recommendation and provide sufficient information for the purposes of breach detection, research and recommendations​. However, during periods of least privilege security group engineering, setting this the filter to "All" can be very helpful in discovering existing traffic flows required for proper operation of an already running environment.
+
+
+=== Ensure a log metric filter and alarm exist for unauthorized API calls
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metrics.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. It is recommended that a metric filter and alarm be established for unauthorized API calls.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring unauthorized API calls will help reveal application errors and may reduce time to detect malicious activity. ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region CloudTrail, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured.
+
+
+=== Ensure a log metric filter and alarm exist for Management Console sign-in without MFA
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metrics_mfa.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank]. It is recommended that a metric filter and alarm be established for console logins that are not protected by multi-factor authentication (link:https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html[MFA, window=_blank]).
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring for single-factor console logins will increase visibility into accounts that are not protected by link:https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html[MFA, window=_blank]. Ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured for Management Console sign-in without MFA.
+
+
+=== Ensure a log metric filter and alarm exist for usage of root account
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metrics_root.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. It is recommended that a metric filter and alarm be established for root login attempts.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured for root login attempts.
+
+
+=== Ensure a log metric filter and alarm exist for IAM policy changes
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metrics_iam.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. It is recommended that a metric filter and alarm be established changes made to Identity and Access Management (IAM) policies.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring changes to link:https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html[IAM policies, window=_blank] will help ensure authentication and authorization controls remain intact, so ensure that there is at least one active multi-region CloudTrail with prescribed metric filters and alarms configured for IAM policy changes.
+
+=== Ensure a log metric filter and alarm exist for CloudTrail configuration changes
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metrics_ct.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. It isrecommended that a metric filter and alarm be established for detecting changes to CloudTrail's configurations.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring changes to CloudTrail's configuration will help ensure sustained visibility to activities performed in the AWS account. Ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured for CloudTrail configuration changes.
+
+
+=== Ensure a log metric filter and alarm exist for AWS Management Console authentication failures
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metrics_console.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. It is recommended that a metric filter and alarm be established for failed console authentication attempts.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring failed console logins may decrease lead time to detect an attempt to brute force a credential, which may provide an indicator, such as source IP, that can be used in other event correlation. Ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured for AWS Management Console authentication failures.
+
+
+=== Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metrics_deletion.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. It is recommended that a metric filter and alarm be established for customer created CMKs which have changed state to disabled or scheduled deletion.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and alarms configured disabling or scheduled deletion of customer created link:https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys-console.html[CMKs, window=_blank]
+
+
+=== Ensure a log metric filter and alarm exist for S3 bucket policy changes
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:  image:prowler_metrics_s3.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. It is recommended that a metric filter and alarm be established for changes to S3 bucket policies.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring changes to S3 bucket policies may reduce time to detect and correct permissive policies on sensitive S3 buckets. Ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured for link:https://docs.aws.amazon.com/AmazonS3/latest/gsg-retired/GetStartedWithS3.html[S3 bucket, window=_blank] policy changes.
+
+=== Ensure a log metric filter and alarm exist for AWS Config configuration changes
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metrics_aws_confi.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. It is recommended that a metric filter and alarm be established for detecting changes to CloudTrail's configurations.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring changes to AWS Config configuration will help ensure sustained visibility of configuration items within the AWS account. Ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank]  with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured for link:https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html[AWS Config, window=_blank] configuration changes.
+
+=== Ensure a log metric filter and alarm exist for security group changes (Scored)
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metrics_security.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. Security Groups are a stateful packet filter that controls ingress and egress traffic within a VPC. It is recommended that a metric filter and alarm be established changes to Security Groups.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring changes to security group will help ensure that resources and services are not unintentionally exposed. ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured link:https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html[security group, window=_blank] changes.
+
+
+
+=== Ensure a log metric filter and alarm exist for changes to Network Access Control Lists (NACL)
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metrics_net.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. NACLs are used as a stateless packet filter to control ingress and egress traffic for subnets within a VPC. It is recommended that a metric filter and alarm be established for changes made to NACLs.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring changes to NACLs will help ensure that AWS resources and services are not unintentionally exposed. ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured for changes to Network Access Control Lists (link:https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html[NACL, window=_blank]).
+
+
+=== Ensure a log metric filter and alarm exist for changes to network gateways
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metric_net_gw.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. Network gateways are required to send/receive traffic to a destination outside of a VPC. It is recommended that a metric filter and alarm be established for changes to network gateways.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring changes to network gateways will help ensure that all ingress/egress traffic traverses the link:https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html[VPC, window=_blank] border via a controlled path. Ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured for changes to network link:https://docs.aws.amazon.com/storagegateway/latest/userguide/WhatIsStorageGateway.html[gateways].
+
+
+=== Ensure a log metric filter and alarm exist for route table changes
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metric_tables.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. Routing tables are used to route network traffic between subnets and to network gateways. It is recommended that a metric filter and alarm be established for changes to route tables.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring changes to route tables will help ensure that all link:https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html[VPC, window=_blank] traffic flows through an expected path. Ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured for link:https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#RouteTables[route table, window=_blank] changes.
+
+
+=== Ensure a log metric filter and alarm exist for VPC changes
+
+CIS SEVERITY:​ ​ ​ [green]#Low#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_metric_vcp.png[]
+
+ISSUE DESCRIPTION:
+
+Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. It is possible to have more than 1 VPC within an account, in addition it is also possible to create a peer connection between 2 VPCs enabling network traffic to route between VPCs. It is recommended that a metric filter and alarm be established for changes made to VPCs.
+
+PROOF OF VULNERABILITY:
+
+image:cloudTrail-enabled.png[]
+
+image:cloudTrail-group.png[]
+
+RECOMMENDATIONS​:
+
+Monitoring changes to link:https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html[IAM policies, window=_blank] will help ensure authentication and authorization controls remain intact. Ensure that there is at least one active link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html[multi-region, window=_blank] link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html[CloudTrail, window=_blank] with prescribed metric filters and link:https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html[alarms, window=_blank] configured  for link:https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html[VPC, window=_blank] changes
+
+
+
+=== Ensure no security groups allow ingress from 0.0.0.0/0 or ::/0 to port 22
+
+CIS SEVERITY:​ ​ ​ [red]#High#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_security_group_22.png[]
+
+|===
+| ** Security Group ** | ** Region ** 
+| sg-0171ea322803cfbd5 | us-east-2
+|===
+
+ISSUE DESCRIPTION:
+
+Security groups provide stateful filtering of ingress/egress network traffic to AWS resources. It is recommended that no security group allows unrestricted ingress access to port 22.
+
+PROOF OF VULNERABILITY:
+
+image:aws_security_all.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to implement the prescribed state:
+
+1. Login to the link:https://console.aws.amazon.com/vpc/home[AWS Management VPC, window=_blank] Console.
+2. In the left pane, click Security Groups
+3. For each security group, perform the following:
+4. Select the security group
+5. Click the Inbound Rules tab
+6. Identify the rules to be removed
+7. Click the x in the Remove column
+8. Click Save
+
+////
+
+=== Ensure no security groups allow ingress from 0.0.0.0/0 or ::/0 to port 3389
+
+CIS SEVERITY:​ ​ ​ [red]#High#
+
+PROFILE APPLICABILITY: CIS 1.2
+
+image:prowler_port_3339.png[]
+
+|===
+| ** Security Group ** | ** Region **
+| sg-93286efb | us-east-2
+|===
+
+ISSUE DESCRIPTION:
+
+Security groups provide stateful filtering of ingress/egress network traffic to AWS resources. It is recommended that no security group allows unrestricted ingress access to port 3389.
+
+PROOF OF VULNERABILITY:
+
+image:aws_security_all.png[]
+
+RECOMMENDATIONS​:
+
+Perform the following to implement the prescribed state:
+
+1. Login to the link:https://console.aws.amazon.com/vpc/home[AWS Management, window=_blank] Console
+2. In the left pane, click Security Groups
+3. For each security group, perform the following:
+4. Select the security group
+5. Click the Inbound Rules tab
+6. Identify the rules to be removed
+7. Click the x in the Remove column
+8. Click Save
+////

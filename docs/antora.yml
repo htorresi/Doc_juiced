@@ -1,0 +1,6 @@
+name: aws-assesment
+title: SellMark AWS Assesment
+version: 2021
+nav:
+##- modules/ROOT/nav.adoc
+- modules/assesment/nav.adoc
