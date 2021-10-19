@@ -1,6 +1,6 @@
 site:
-  title: AWS Security Assesment - SellMark
-  start_page: aws-assesment::index.adoc
+  title: Windows Server Security Remediation - JuicedTech
+  start_page: Security-Remediation::index.adoc
 content:
   sources:
   - url: ./
@@ -18,10 +18,10 @@ asciidoc:
   attributes:
     sectanchors: true
     stylesheet: docs/css/asciidoctor.css
-    company-name: SellMark
-    company-short-name: SellMark
-    audit-period-aug: 15 Aug to 19 Aug 2021
-    audit-period-sep: 10 Sep to 15 Sep 2021
-    audit-type: AWS Security Assesment
-    aws-account: 947619834730
+    company-name: juicedTech
+    company-short-name: juicedTech
+    audit-period-aug: 10 Oct to 19 Oct 2021
+    #audit-period-sep: 10 Sep to 15 Sep 2021
+    audit-type: Windows Server Security Remediation
+    aws-account: 1234567890
     

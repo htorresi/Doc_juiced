@@ -1,3 +1,3 @@
-= AWS Security Assessment Report August 19
+= Windows Server Security Remediation October 19
 
-This section includes the results of the AWS Security Assessment Report.
+This section includes the results of the Security Remediation.

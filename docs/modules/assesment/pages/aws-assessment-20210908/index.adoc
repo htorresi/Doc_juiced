@@ -1,3 +1,0 @@
-= AWS Security Assessment Report September 15
-
-This section includes the results of the AWS Security Assessment Report.
