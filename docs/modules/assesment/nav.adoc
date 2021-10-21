@@ -1,12 +1,12 @@
 * xref:index.adoc[JuicedTech - Security Scans and Security Remediation]
+** xref:ws-remediation-20211010/index.adoc[Windows Server Security Remediation - Oct 10 2021]
+*** xref:ws-remediation-20211010/introduction.adoc[Introduction]
+*** xref:ws-remediation-20211010/cis-benchmark.adoc[Standard]
+*** xref:ws-remediation-20211010/report.adoc[Report]
+*** xref:ws-remediation-20211010/scan.adoc[Scan]
+
 ** xref:ws-remediation-20211019/index.adoc[Windows Server Security Remediation - Oct 19 2021]
 *** xref:ws-remediation-20211019/introduction.adoc[Introduction]
 *** xref:ws-remediation-20211019/cis-benchmark.adoc[Standard]
 *** xref:ws-remediation-20211019/report.adoc[Report]
 *** xref:ws-remediation-20211019/scan.adoc[Scan]
-
-//** xref:aws-assessment-20210908/index.adoc[AWS Security Assessment - Sep 15 2021]
-//*** xref:aws-assessment-20210908/introduction.adoc[Introduction]
-//*** xref:aws-assessment-20210908/cis-benchmark.adoc[Standard]
-//*** xref:aws-assessment-20210908/report.adoc[Report]
-//*** xref:aws-assessment-20210908/scan.adoc[Scan]

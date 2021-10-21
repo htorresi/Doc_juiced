@@ -1,11 +1,21 @@
 = Security Scans
 
-== CIS Member Server Level 1 Scan
+== CIS Windows Server 2012 R2 Member Server Level 1 Scan
 
 === Summary
 
-image:inspector_90_score.png[]
+image:inspector_13_score_w12r2.png[]
 
 === Results
 
-link:{attachmentsdir}/Amazon_Inspector_w12r2_135.html[CIS Member Server Level 1 Scan] - 21 Oct 2021
+link:{attachmentsdir}/Amazon_Inspector_w12r2_60.html[CIS Windows Server 2012 R2 Member Server Level 1 Scan] - 19 Oct 2021
+
+== CIS Windows Server 2016 Member Server Level 1 Scan
+
+=== Summary
+
+image:inspector_11_score_w16.png[]
+
+=== Results
+
+link:{attachmentsdir}/Amazon_Inspector_w2016_score25.html[CIS Windows Server 2016 Member Server Level 1 Scan] - 19 Oct 2021

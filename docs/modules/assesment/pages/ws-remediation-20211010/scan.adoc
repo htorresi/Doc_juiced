@@ -8,4 +8,4 @@ image:inspector_90_score.png[]
 
 === Results
 
-link:{attachmentsdir}/Amazon_Inspector_w12r2_135.html[CIS Member Server Level 1 Scan] - 21 Oct 2021
+link:{attachmentsdir}/Amazon_Inspector_w12r2_135.html[CIS Member Server Level 1 Scan] - 10 Oct 2021
