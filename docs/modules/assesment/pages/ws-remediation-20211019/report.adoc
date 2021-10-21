@@ -1,23 +1,22 @@
-= AWS Security Assessment Report for *{company-name}*
+= Windows server Security Remediation Report for *{company-name}*
 :doctype: book
 //:stylesheet: asciidoc.css
 :table-stripes: even
 
 == Executive summary
 
-This report presents the results of the {audit-type} audit for {company-name} AWS Account {aws-account}, performed during the audit period {audit-period-aug}.
+This report presents the results of the {audit-type} audit for {company-name}, performed during the audit period {audit-period-aug}.
 
-The recommendations provided in this report provide guidanance on the recommendations​ of the identified security risks. This document serves as an assesement of the security controls in place, for the given risk and compliance requirement for the company, and is based on the results of AWS Security Assessment Testing performed over the audit period. Evaluation ratings compare information gathered during the course of the engagement to “best in class” criteria for security standards. These security standards are based on:
+The recommendations provided in this report provide guidanance on the recommendations​ of the identified security risks. This document serves as an assesement of the security controls in place, for the given risk and compliance requirement for the company, and is based on the results of Windows Server Security Remediation performed over the audit period. Evaluation ratings compare information gathered during the course of the engagement to “best in class” criteria for security standards. These security standards are based on:
 
-- CIS AWS Foundation Benchmark 1.2, Level 2
-- AWS consensus best-practices.  
+- CIS Windows Server Benchmark 2.2, MS Level 1
 
 We highly recommend to review section of Summary of Business Risks and High-Level and Recommendations for better understanding of risks and discovered security issues.
 
 |===
 |Scope |Security Level |Grade 
 
-|AWS CIS Benchmark Foundation 1.2
+|CIS Windows Server Benchmark 2.2
 |Poor
 |[maroon]#D#
 
@@ -67,34 +66,44 @@ public, an organization’s overall security posture will change. Such changes m
 
 Overview
 
-This document provides prescriptive guidance for configuring security options for a subset of Amazon Web Services with an emphasis on foundational, testable, and architecture agnostic settings. Specific Amazon Web Services in scope for this document include:
+Level 1 - Member Server
+Items in this profile apply to Member Servers and intend to:
 
- - AWS Identity and Access Management (IAM)
- - AWS Config
- - AWS CloudTrail
- - AWS CloudWatch
- - AWS Simple Notification Service (SNS)
- - AWS Simple Storage Service (S3)
- - AWS VPC (Default)
+- be practical and prudent;
+- provide a clear security benefit; and
+- not inhibit the utility of the technology beyond acceptable means.
+
+Items in this profile also apply to Member Servers that have the following Roles
+enabled:
+
+- AD Certificate Services
+- DHCP Server
+- DNS Server
+- File Server
+- Hyper-V
+- Network Policy and Access Services
+- Print Server
+- Remote Access Services
+- Remote Desktop Services
+- Web Server
 
 Organization:: {company-name}
 Audit Type:: {audit-type}
-Accounts:: {aws-account} 
 Audit period:: {audit-period-aug}
 
 Consultants performed discovery process to gather information about the target and searched for information disclosure vulnerabilities. With this data in hand, we conducted the bulk of the testing manually, which consisted of input validation tests, impersonation (authentication and authorization) tests, and session state management tests. The purpose of this penetration
-testing is to illuminate security risks by leveraging weaknesses  within the environment that leadto the obtainment of unauthorized access and/or the retrieval of sensitive information. The shortcomings identified during the assessment were used to formulate recommendations and mitigation strategies for improving the overall security posture.
+testing is to illuminate security risks by leveraging weaknesses within the environment that leadto the obtainment of unauthorized access and/or the retrieval of sensitive information. The shortcomings identified during the assessment were used to formulate recommendations and mitigation strategies for improving the overall security posture.
 
 == Results Overview     
 
 The test uncovered a vulnerabilities that may cause sensitive data leakage, broken confidentiality and integrity and availability of the resource.
 Identified vulnerabilities are exploitable and the risk posed by these vulnerabilities can cause damage to the application and company.
 
-**CIS Benchmark 1.2 Level 2**
+**CIS Benchmark 2.2 MS Level 1**
 
-image::Vulnerabilities_by_severity_sellmark.png[]
+//image::Vulnerabilities_by_severity_sellmark.png[]
 
-We performed manual and automated security testing according to the testing methodology.
+//We performed manual and automated security testing according to the testing methodology.
 
 // //
 // Severity scoring:
@@ -107,6 +116,8 @@ We performed manual and automated security testing according to the testing meth
 // - *Informational* -- This finding does not indicate vulnerability, but states a comment that
 // notifies about design flaws and improper implementation that might cause a problem in
 // the long run.
+
+////
 
 |===
 |Severity |[maroon]#Critical# |[red]#High# |[blue]#Medium# |[green]#Low# |Informational 
@@ -166,13 +177,13 @@ transactions. Dedicate security operations engineer to this task
 - Use only encrypted channels for communications
 - Do not send any unnecessary data in requests and cookies
 - Improve server and application configuration to meet security best practises
-
+////
 
 == Performed tests
 
-* The applicable CIS AWS Benchmark tests
+* The applicable Windows Server 2012 R2 CIS Benchmark tests
 
-=== CIS AWS Foundation Benchmark 1.2 Level 2
+=== Windows server CIS Benchmark 2.2 MS Level 1
 
 === Findings Details
 
@@ -183,7 +194,7 @@ transactions. Dedicate security operations engineer to this task
 | 1.1.1 | Ensure 'Enforce password history' is set to '24 or more password(s)'                                       | X        | X |     | 24 passwords                                                     
 | 1.1.2 | Ensure 'Maximum password age' is set to '60 or fewer days, but not 0'                                      | X        | X |     | 42 days                                                          
 | 1.1.3 | Ensure 'Minimum password age' is set to '1 or more day(s)'                                                 | X        | X |     | 1 day                                                            
-| 1.1.4 | Ensure 'Minimum password length' is set to '15 or more character(s)'                                       | X        | X |     | 15 characters                                                    
+| 1.1.4 | Ensure 'Minimum password length' is set to '15 or more character(s)'                                       | X        | X |     | 14 characters                                                    
 | 1.1.5 | Ensure 'Password must meet complexity requirements' is set to 'Enabled'                                    | X        | X |     |                                                                  
 | 1.1.6 | Ensure 'Store passwords using reversible encryption' is set to 'Disabled'                                  | X        | X |     |                                                                  
 | 1.2.1 | Ensure 'Account lockout duration' is set to '15 or more minute(s)'                                         | X        | X |     | 30 minutes                                                       
@@ -248,8 +259,8 @@ transactions. Dedicate security operations engineer to this task
 | 2.3.6.6 | Ensure 'Domain member: Require strong (Windows 2000 or later) session key' is set to 'Enabled'           | X        | X |     |                                                                  
 | 2.3.7.1 | Ensure 'Interactive logon: Do not display last user name' is set to 'Enabled'                            | X        | X |     |                                                                  
 | 2.3.7.2 | Ensure 'Interactive logon: Do not require CTRL+ALT_DEL' is set to 'Disabled'                             | X        | X |     |                                                                  
-| 2.3.7.3 | Configure 'Interactive logon: Message text for users attempting to log on'                               |          |   |  X  | Organizations should use their own text                          
-| 2.3.7.4 | Configure 'Interactive logon: Message title for users attempting to log on'                              |          |   |  X  | Organizations should use their own text                          
+| 2.3.7.3 | Configure 'Interactive logon: Message text for users attempting to log on'                               |          |   |  X  | This computer system is the property of JuicedTech....                          
+| 2.3.7.4 | Configure 'Interactive logon: Message title for users attempting to log on'                              |          |   |  X  | This computer system is the property of JuicedTech....                          
 | 2.3.7.5 | Ensure 'Interactive logon: Number of previous logons to cache (in case domain controller is not available)' is set to '4 or fewer logons' (MS ONLY)| X        |   |     |                        
 | 2.3.7.6 | Ensure 'Interactive logon: Prompt user to change password before expiration' is set to 'between 5 and 14 days'| X        | X |     |                                                             
 | 2.3.7.7 | Ensure 'Interactive logon: Require Domain Controller Authentication to unlock workstation' is set to 'Enabled' (MS ONLY)| X        |   |     |                                                   
@@ -402,6 +413,6 @@ transactions. Dedicate security operations engineer to this task
 
 ==== Project Limitations
 
-The assessment was conducted against the production AWS environment with the security auditor permissions provided by the company.
+The assessment was conducted against the production Windows Server environment with the security auditor permissions provided by the company.
 
 
