@@ -1,0 +1,76 @@
+= Introduction to {company-name} Windows Security Remediation.
+Rod Murillo <rodm@greenmarimba.io>
+v1.0, 2021-02-25
+
+This site represents the Windows Security Remediation Report for {company-name}, performed by Rod Murillo during the audit period {audit-period-aug}.
+
+It includes the Methodology used to perform the tests, and the results of test.
+
+The assessment is based on the CIS AWS Foundation Benchmark v.2.2
+
+== Overview
+
+Security Proposal Details
+
+- Provide a full scan/assessment of the {company-name}, and all its resources, testing for common security issues.
+- Test against the CIS Microsoft Windows Server 2012 R2 Benchmark and consensus best practices for managing windows resources
+- A complete list of vulnerabilities discovered.
+- Provide remediation guidance and recommendations on how to address reported vulnerabilities.
+//- Check for key HIPAA security compliance.
+
+
+== Methodology
+
+Our Assesment Methodology is based on following guides and standards:
+
+- xref:ROOT:cis-benchmark.adoc[CIS windows server Foundation Benchmark v2.2]
+//- https://www.hhs.gov/hipaa/for-professionals/security/index.html[HIPAA Security Rule]
+
+The Center for Internet Security (CIS) developed the CIS Foundations Benchmark, a set of security configuration best practices for Windows. These industry-accepted best practices go beyond the high-level security guidance already available, providing Windows users with clear, step-by-step implementation and assessment procedures.
+
+////
+The HIPAA Security Rule establishes national standards to protect individuals’ electronic personal health information that is created, received, used, or maintained by a covered entity. The Security Rule requires appropriate administrative, physical and technical safeguards to ensure the confidentiality, integrity, and security of electronic protected health information. 
+////
+The Security Rule is located at 45 CFR Part 160 and Subparts A and C of Part 164.  
+
+=== Areas Covered
+
+Items in this profile apply to Member Servers and intend to:
+
+- be practical and prudent;
+- provide a clear security benefit; 
+
+and
+
+- not inhibit the utility of the technology beyond acceptable means.
+
+Items in this profile also apply to Member Servers that have the following Roles
+enabled:
+
+- AD Certificate Services
+- DHCP Server
+- DNS Server
+- File Server
+- Hyper-V
+- Network Policy and Access Services
+- Print Server
+- Remote Access Services
+- Remote Desktop
+
+=== Areas Not Covered
+
+The assesments does not include the following:
+
+- are intended for environments or use cases where security is paramount
+- acts as defense in depth measure
+- may negatively inhibit the utility or performance of the technology
+
+== Author/Assessor
+
+Rodrigo Murillo, CISSP, CCSP
+
+- rodm@greenmarimba.com
+- 602-476-8880
+
+
+WARNING: Confidential and Proptiertary. Do not disclose with out permission.
