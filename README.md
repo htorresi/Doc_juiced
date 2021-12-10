@@ -1,21 +1,21 @@
 # Hardening windows server 2019
 
-## standard
+## Standard
 
 [CIS_Windows_Server_2019_Benchmark.pdf](https://github.com/htorresi/Doc_juiced/files/7689051/CIS_Windows_Server_2019_Benchmark.pdf)
 
-## pre requirements
+## Pre requirements
 
-* previously installed Group Policy Management in AD
-* pre-configured GPO package with windows baseline based in CIS benchmark (Microsoft Security Compliance tool kit 1.0)
+* Previously installed Group Policy Management in AD.
+* Pre-configured GPO package with windows baseline based in CIS benchmark (Microsoft Security Compliance tool kit 1.0).
 
-## hardening implementation
+## Hardening implementation
 
 1. In the first place, enter the `Dashboard Server`. Once there, please click on `Tools`. Then click on `Group Policy Manager`.
 
 ![img_gpomana](https://user-images.githubusercontent.com/85255387/145480011-9ebbf84c-f937-407e-8349-f93fb02931b7.png)
 
-2. once located in the domain where the GPO will be applied, we go to the `Group Policy Objects` section, Please right click on it, and select the option: `New`.
+2. Once located in the domain where the GPO will be applied, we go to the `Group Policy Objects` section, Please right click on it, and select the option: `New`.
 
 ![img_001](https://user-images.githubusercontent.com/85255387/145480065-1fc0e1ad-c41b-4f6f-9c45-de8c77074959.png)
 
@@ -25,7 +25,7 @@
 
 ![img_003](https://user-images.githubusercontent.com/85255387/145480113-0da2f904-ca07-4fb9-ac8d-9f07fda4e224.png)
 
-4. click `Next`.
+4. Click `Next`.
 
 ![img_004](https://user-images.githubusercontent.com/85255387/145480190-76ebfdeb-448e-478e-9b43-b16cf90170ee.png)
 
@@ -38,7 +38,7 @@ This is the *[Microsoft Tool kit 1.0](https://www.microsoft.com/en-us/download/d
 
 ![img_007](https://user-images.githubusercontent.com/85255387/145480810-03136873-335c-45e2-8bfa-a13642b711f6.png)
 
-7. select browse -> c:downolads -> Windows Server 2019 Security Baseline -> GPOs, click `Next`.
+7. Select browse -> c:downolads -> Windows Server 2019 Security Baseline -> GPOs, click `Next`.
 
 ![img_006](https://user-images.githubusercontent.com/85255387/145480880-af35eb47-caec-43e4-9f75-48ab1ed9c467.png)
 
@@ -46,19 +46,19 @@ This is the *[Microsoft Tool kit 1.0](https://www.microsoft.com/en-us/download/d
 
 ![img_08](https://user-images.githubusercontent.com/85255387/145480906-fa73caf3-a766-4d19-ad34-80e2f1df2a69.png)
 
-9. click `Next`
+9. Click `Next`
 
 ![img_009](https://user-images.githubusercontent.com/85255387/145480940-c96e5eee-784f-491f-83be-693b9c9c10e6.png)
 
-10. click `Next`
+10. Click `Next`
 
 ![img_010](https://user-images.githubusercontent.com/85255387/145480952-136cb70c-ae97-45e6-beb8-25e3f404df7f.png)
 
-11. click `Finish`
+11. Click `Finish`
 
 ![img_011](https://user-images.githubusercontent.com/85255387/145480976-177aabb7-08f9-431d-b837-6183452b154a.png)
 
-12. click `Ok`.
+12. Click `Ok`.
 
 ![img_012](https://user-images.githubusercontent.com/85255387/145481015-a293386e-275e-4069-b3fc-1b725352093f.png)
 
@@ -68,7 +68,7 @@ This is the *[Microsoft Tool kit 1.0](https://www.microsoft.com/en-us/download/d
 
 ## Exceptions
 
-#### the exceptions are formed by configurations that interfere with the use of the machine to do tests, for example: firewall rules for RDP connections or download utilities etc. and others that must be done locally for the machines that are part of the domain, for example installing programs or features. Therefore, they are not considered for the application of hardening through GPOs in the domain.
+#### The exceptions are formed by configurations that interfere with the use of the machine to do tests, for example: firewall rules for RDP connections or download utilities etc. and others that must be done locally for the machines that are part of the domain, for example installing programs or features. Therefore, they are not considered for the application of hardening through GPOs in the domain.
 
 | Rule                                                                                                                                                                | Severity | Failed |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ |
