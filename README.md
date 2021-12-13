@@ -74,7 +74,6 @@ This is the *[Microsoft Tool kit 1.0](https://www.microsoft.com/en-us/download/d
 | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------ |
 | 2.2.21 (L1) Ensure 'Deny access to this computer from the network' is set to 'Guests, Local account and member of Administrators group' (MS only) | High     | 1      |
 | 2.3.1.1 (L1) Ensure 'Accounts: Administrator account status' is set to 'Disabled' (MS only)                                                       | High     | 1      |
-| 9.3.2 (L1) Ensure 'Windows Firewall: Public: Inbound connections' is set to 'Block (default)'                                                     | High     | 1      |
 | 18.2.1 (L1) Ensure LAPS AdmPwd GPO Extension / CSE is installed (MS only)                                                                         | High     | 1      |
 | 18.3.5 (L1) Ensure 'Turn on Windows Defender protection against Potentially Unwanted Applications' is set to 'Enabled'                            | High     | 1      |
 | 18.5.4.1 (L1) Set 'NetBIOS node type' to 'P-node' (Ensure NetBT Parameter 'NodeType' is set to '0x2 (2)') (MS Only)                               | High     | 1      |
